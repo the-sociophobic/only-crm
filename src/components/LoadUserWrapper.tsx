@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react'
 
 import { useUser, useAuthUser } from '../hooks'
+import { useQuery } from 'react-query'
+
+import { getUser } from '../queries'
+import { UserType } from '../models'
+import useStore from '../hooks/useStore'
+import Login from '../pages/Login'
 
 
 export type LoadUserWrapperProps = {
@@ -11,19 +17,19 @@ export type LoadUserWrapperProps = {
 const LoadUserWrapper: React.FC<LoadUserWrapperProps> = ({
   children
 }) => {
-  const login = useAuthUser()
-  const user = useUser('1')
+  const { data, isLoading } = useQuery<Partial<UserType>>('user', getUser)
+  const user = useStore(state => state.user)
 
-  useEffect(() => {
-    login({
-      username: '',
-      password: ''
-    })
-  }, [login])
+  if (isLoading)
+    return <p>Loading...</p>
 
-  if (!user) return <p>Loading...</p>
+  console.log(data)
+  useStore.setState({ user: data })
 
-  return <>{children}</>
+  return user ?
+    <>{children}</>
+    :
+    <Login />
 }
 
 
