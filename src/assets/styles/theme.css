@@ -1,0 +1,13 @@
+:root {
+  color-scheme: light dark;
+
+  --main-background: white;
+  --main-text: black;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-background: black;
+    --main-text: white;
+  }
+}
