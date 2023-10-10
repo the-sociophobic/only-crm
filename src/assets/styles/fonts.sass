@@ -1,6 +1,23 @@
 @import '~bootstrap/scss/bootstrap.scss'
 
+@font-face
+  font-family: 'Poppins'
+  src: url('../fonts/Poppins/Poppins-Regular.ttf') format('truetype')
 
+@font-face
+  font-family: 'Poppins'
+  font-weight: 500
+  src: url('../fonts/Poppins/Poppins-Medium.ttf') format('truetype')
+
+@font-face
+  font-family: 'Poppins'
+  font-weight: 600
+  src: url('../fonts/Poppins/Poppins-SemiBold.ttf') format('truetype')
+
+
+*
+  font-family: 'Poppins'
+  
 .underline
   width: 100%
   position: relative
@@ -24,7 +41,7 @@
 
 
 .h1, .h2, .h3
-  font-weight: bold
+  font-weight: 500
   &--underline
     @extend .underline
 .h1
@@ -39,14 +56,14 @@
       @include font-params(48, 48)
 
 .h2
-  @include font-params(32, 40)
-  margin-bottom: 26px
-  @include media-breakpoint-down(md)
-    @include font-params(26, 32)
-    margin-bottom: 21px
-  @include media-breakpoint-down(xs)
-    @include font-params(22, 28)
-    margin-bottom: 18px
+  @include font-params(30, 45)
+  // margin-bottom: 26px
+  // @include media-breakpoint-down(md)
+  //   @include font-params(26, 32)
+  //   margin-bottom: 21px
+  // @include media-breakpoint-down(xs)
+  //   @include font-params(22, 28)
+  //   margin-bottom: 18px
 .h3
   @include font-params(20, 28)
   @include media-breakpoint-down(md)
@@ -105,3 +122,14 @@
 
 .p
   margin-bottom: 0
+
+
+a
+  color: $main-blue !important
+
+small
+  font-size: 13px !important
+  color: $secondary-text
+
+.text-red
+  color: red

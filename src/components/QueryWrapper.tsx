@@ -8,7 +8,14 @@ export type QueryWrapperProps = {
 }
 
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 0
+    }
+  }
+})
 
 const QueryWrapper: React.FC<QueryWrapperProps> = ({
   children

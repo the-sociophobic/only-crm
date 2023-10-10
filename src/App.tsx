@@ -1,33 +1,20 @@
-import React from 'react'
-
 import { Toaster } from 'react-hot-toast'
-
 import QueryWrapper from './components/QueryWrapper'
-import LoadUserWrapper from './components/LoadUserWrapper'
-import ChatList from './components/Chat/ChatList'
-import Header from './components/Common/Header'
-import useStore from './hooks/useStore'
-import Login from './pages/Login'
-import ColorModeListener from './pages/ColorModeListener'
+import ProtectedRoutes from './components/Common/ProtectedRoutes'
+import { PopupWrapper } from './components/Common/Popup'
 
 
-const App = () => {
-  const user = useStore(state => state.user)
-
-  return (
-    <QueryWrapper>
-      <ColorModeListener />
-      <LoadUserWrapper>
-        <div className='App'>
-          <div className='content'>
-            <Header />
-          </div>
+const App = () =>
+  <QueryWrapper>
+    <PopupWrapper>
+      <div className='App'>
+        <div className='content'>
+          <ProtectedRoutes />
         </div>
-      </LoadUserWrapper>
+      </div>
       <Toaster />
-    </QueryWrapper>
-  )
-}
+    </PopupWrapper>
+  </QueryWrapper>
 
 
 export default App

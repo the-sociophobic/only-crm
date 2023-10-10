@@ -1,47 +1,37 @@
 import React from 'react'
-
-import { useMutation, useQuery, useQueryClient } from 'react-query'
-
+import { shallow } from 'zustand/shallow'
+import { Row, Col } from 'react-bootstrap'
 import useStore from '../../hooks/useStore'
-import { UserType } from '../../models'
-import { getUser } from '../../queries'
-import { Button } from 'react-bootstrap'
-import { setAuthHeader } from '../../hooks/auth'
-
-
+import CreatorDropdown from './CreatorDropdown'
+import { CreatorType } from '../../models'
 
 const Header: React.FC = () => {
-  const user = useStore(state => state.user)
-  // const { data: user, isLoading } = useQuery<Partial<UserType>>('user', getUser)
-  const queryClient = useQueryClient()
-  const mutation = useMutation(async () => {}, {
-    onSuccess: () => queryClient.invalidateQueries('user')
-  })
+  const [
+    creators,
+    currentCreator,
+    setCurrentCreator
+  ] = useStore(state => [
+    state.creators,
+    state.currentCreator,
+    state.setCurrentCreator
+  ], shallow)
+
+
+  if (!creators || !currentCreator)
+    return <div />
 
   return (
-    <div className='Header d-flex flex-row align-items-center'>
-      <div className='container'>
-        <div className='row'>
-          <div className='col'>
-            Чаты
-          </div>
-          <div className='col'>
-            Статы
-          </div>
-          <div className='col'>
-            {user?.username}
-          </div>
-          <div className='col'>
-            <Button onClick={() => {
-              setAuthHeader(null)
-              mutation.mutate()
-            }}>
-              Выйти
-            </Button>
-          </div>
+    <Row>
+      <Col>
+        <div className='border-bottom p-3 d-flex flex-row justify-content-end'>
+          <CreatorDropdown
+            creators={creators as CreatorType[]}
+            active={currentCreator}
+            setActive={setCurrentCreator}
+          />
         </div>
-      </div>
-    </div>
+      </Col>
+    </Row>
   )
 }
 

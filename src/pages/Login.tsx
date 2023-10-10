@@ -1,83 +1,61 @@
 import React from 'react'
 
-import { Button, Col, Container, Form, Nav, Row } from 'react-bootstrap'
-import submitFieldNames from '../utils/submitFieldNames'
-import { auth, register } from '../queries'
 import { useMutation, useQueryClient } from 'react-query'
+import { Col, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+
+import { auth } from '../queries'
+import Logo from '../components/Common/Logo'
+import MemberForm from '../components/Members/MemberForm'
 
 
 const Login: React.FC = () => {
-  const [activeKey, setActiveKey] = React.useState('login')
-  const registerFieldNames = ['username', 'password', 'firstname', 'lastname']
-  const renderField = (fieldName: string) =>
-    <Form.Group as={Col} controlId={fieldName}>
-      <Form.Label>{fieldName}</Form.Label>
-      <Form.Control
-        type={['email', 'password'].includes(fieldName) ? fieldName : 'text'}
-        placeholder={`Enter ${fieldName}`}
-      />
-    </Form.Group>
-  const fieldsMapped = registerFieldNames.map(fieldName => renderField(fieldName))
-
+  const [error, setError] = React.useState('')
   const queryClient = useQueryClient()
-  const authMutation = useMutation(props => auth(props as any), {
-    onSuccess: () => queryClient.invalidateQueries('user')
+  const authMutation = useMutation({
+    mutationFn: props => {
+      console.log('AUTH');
+      return auth(props as any);
+    },
+    onSuccess: () => {
+      console.log('Success')
+      setError('')
+      queryClient.invalidateQueries('user')
+    },
+    onError(error: Error | any, variables, context) {
+      console.log('ERROR ', error)
+      setError(error.toString())
+    },
   })
-  const registerMutation = useMutation(props => register(props as any), {
-    onSuccess: () => queryClient.invalidateQueries('user')
-  })
-
-  const renderLogin = () => (
-    <Form onSubmit={submitFieldNames(registerFieldNames.slice(0, 2), authMutation.mutate as any)}>
-      <Row className='mb-4'>
-        {fieldsMapped.slice(0, 2)}
-      </Row>
-      <Button type='submit'>Login</Button>
-    </Form>
-  )
-
-  const renderRegister = () => (
-    <Form onSubmit={submitFieldNames(registerFieldNames, registerMutation.mutate as any)}>
-      <Row className='mb-4'>
-        {fieldsMapped.slice(0, 2)}
-      </Row>
-      <Row className='mb-4'>
-        {fieldsMapped.slice(2)}
-      </Row>
-
-      <Button type='submit'>Register</Button>
-    </Form>
-  )
-
-  const renderActive = () => {
-    switch (activeKey) {
-      case 'login':
-        return renderLogin()
-      case 'register':
-        return renderRegister()
-    }
-  }
 
   return (
-    <Container className='mt-5'>
-      <Nav
-        fill
-        variant='tabs'
-        activeKey={activeKey}
-        onSelect={eventKey => setActiveKey(eventKey + '')}
-        className='mb-5'
-      >
-        <Nav.Item>
-          <Nav.Link eventKey='login'>Login</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey='register'>Register</Nav.Link>
-        </Nav.Item>
-      </Nav>
-      {renderActive()}
-    </Container>
+    <Col className='d-flex flex-column justify-content-start'>
+      <Row className='d-flex flex-column justify-content-center'>
+        <div className='col-md-5 col-lg-4 mx-auto mw-420'>
+          <Logo />
+          <h2 className='h2 mb-3 text-center pt-8'>
+            Sign in
+          </h2>
+          <small className='d-block mb-38 text-center'>
+            Or <Link to='/register'>create an account</Link>
+          </small>
+          {error.length > 0 &&
+            <small className='text-red d-block mb-3'>
+              {error}
+            </small>
+          }
+          <MemberForm
+            fieldNames={['username', 'password']}
+            onSubmit={authMutation.mutate as any}
+            buttonText='Login'
+          />
+          <small className='d-block mt-3 text-center mb-5'>
+            Forgot password ?
+          </small>
+        </div>
+      </Row>
+    </Col>
   )
 }
-
 
 export default Login

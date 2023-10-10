@@ -22,7 +22,7 @@ body
   .App
     width: 100vw
     height: 100%
-    min-height: 570px
+    min-height: 100vh
     @extend .d-flex
     @extend .flex-column
     .content
@@ -40,7 +40,213 @@ body
         @extend .px-4
 
 .Header
-  width: 100vw
   height: 80px
+
+.Layout
+  &__side
+    width: 20vw
+    min-width: 200px
+  &__content
+    flex-grow: 1
+
+.bg-blue
+  background-color: $bg-blue
+
+.bg-gray
+  background-color: $main-gray
+
+a
+  text-decoration: none !important
+
+.border-none
+  border: none !important
+
+.Graph-Card
+  height: 300px
+
+.svg-icon
+  width: 23px
+  transform: translateY(-2px)
+
+.list-group
+  .group-item
+    border: none !important
+    color: white
+    font-weight: 500
+    background-color: transparent
+    border-radius: 10px !important
+    &.active
+      background-color: $secondary-active !important
+    &:hover
+      background-color: $secondary-active-transparent
+
+.form-control
+  height: 48px
+  border-radius: 8px !important
+  background-color: $form-bg !important
+  border: none
+  padding-left: 16px
+  padding-right: 16px
+
+.toggle-avatar
+  height: 35px
+  width: 35px
+  border-radius: 1000px
+  margin-right: 10px
+
+.creators_toggle
+  width: 200px
+  padding-right: 10px !important
+  padding-left: 10px
+  padding-top: 5px
+  padding-bottom: 5px
+  border-radius: 15px
+  background-color: #212938 !important
+  &:hover
+    background-color: #1b212e !important
+
+.creators_toggle_menu
+  width: 200px
+  background-color: #212938 !important
+  
+.btn
+  height: 48px
+  border-radius: 9px !important
+  background-color: $main-blue
+  font-weight: 500
+  border: none !important
+
+.logout-btn
+  width: 100%
+  background-color: #212938 !important
+
+.h-200
+  height: 200px
+
+.logo
+  padding-top: 2rem !important
+  margin-left: 30px
+
+.pt-8
+  padding-top: 8rem !important
+
+.logo-container
+  display: flex
+  justify-content: center
+  align-items: center
+  
+.mb-38
+  margin-bottom: 38px
+
+.mw-420
+  max-width: 420px
+
+.p-10
+  padding: 10px
+
+.PopupBg
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  background-color: rgba(0, 0, 0, .85)
+  cursor: pointer
+  z-index: 1000
+  .Popup
+    position: relative
+    z-index: 2000
+    cursor: default
+
+.show-password
+  position: absolute
+  top: 50%
+  right: 42px
+  transform: translateY(-50%)
+  cursor: pointer
+
+.avatar
+  border-radius: 50%
+
+.task-container 
+  margin-top: 20px
+  padding: 20px
+  background: #171b2d
+  border: 1px solid #ddd
+
+.link-container 
+  margin-top: 20px
+  padding: 20px
+  background: #171b2d
+  border: 1px solid #ddd
+
+.promo-card
+  width: 300px
+
+.promo-card .card-text 
+  display: flex
+  justify-content: space-between
+
+.promo-card .card-text span 
+  text-align: right
+
+.task-panel
+  background-color: #212938
+  margin-bottom: 20px
+
+.task-progress 
+  height: 35px
+  border-radius: 20px
+  margin-bottom: 20px
+
+.fan-avatar
+  border-radius: 15px
+  margin-right: 15px
+  height: 35px
+  width: 35px
+
+.fan-header 
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr
+  font-weight: bold
+
+.white-text 
+  fill: white
+
+.graph-tooltip
+  background-color: transparent
+
+.stat-block
+  width: 50%
+
+.fan-row 
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr
+
+.fan-details 
+  display: flex
+  align-items: center
+
+.fan-name 
+  margin-right: 20px 
+
+.Loader
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
   background-color: $main-background
-  border-bottom: 1px solid $main-text
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  &__Logo
+    animation: scale 2s ease-in-out infinite
+    @keyframes scale
+      0%
+        transform: scale(2)
+      50%
+        transform: scale(2.4)
+      100%
+        transform: scale(2)

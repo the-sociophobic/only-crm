@@ -1,6 +1,6 @@
 const submitFieldNames = (
   fieldNames: string[],
-  submit: (values: object) => void
+  submit: (values: any) => any
 ) => {
   return (e: any) => {
     e.preventDefault()

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" class="flex-shrink-0 h-6 w-6 opacity-80">
+	<rect width="400" height="400" rx="200" class="fill-current">
+	</rect>
+	<path d="M156.25 125a87.5 87.5 0 1 0 87.5 87.5 87.53 87.53 0 0 0-87.5-87.5Zm0 113.75a26.25 26.25 0 1 1 26.25-26.25 26.21 26.21 0 0 1-26.25 26.25Z" class="fill-current text-white dark:text-gray-900 opacity-80 ">
+	</path>
+	<path d="M254.6 190.62c22.23 6.4 48.48 0 48.48 0-7.62 33.25-31.77 54.07-66.59 56.61A87.33 87.33 0 0 1 156.25 300l26.25-83.43c27-85.76 40.81-91.57 104.81-91.57h43.94c-7.35 32.37-32.68 57.11-76.65 65.62Z" class="fill-current text-white dark:text-gray-900 ">
+	</path>
+</svg>
